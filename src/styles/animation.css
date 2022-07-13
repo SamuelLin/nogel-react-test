@@ -1,0 +1,17 @@
+@keyframes buyBackgroundAnimation {
+  0% {
+    background-color: var(--animation-flash-green-background-color);
+  }
+  100% {
+    background-color: var(--background-color);
+  }
+}
+
+@keyframes sellBackgroundAnimation {
+  0% {
+    background-color: var(--animation-flash-red-background-color);
+  }
+  100% {
+    background-color: var(--background-color);
+  }
+}
