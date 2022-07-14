@@ -1,15 +1,30 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'DINPro-Medium';
+  src: url('//db.onlinewebfonts.com/t/48a3635ce1e76c0122a143b076f51adf.eot');
+  src: url('//db.onlinewebfonts.com/t/48a3635ce1e76c0122a143b076f51adf.eot?#iefix')
+      format('embedded-opentype'),
+    url('//db.onlinewebfonts.com/t/48a3635ce1e76c0122a143b076f51adf.woff2') format('woff2'),
+    url('//db.onlinewebfonts.com/t/48a3635ce1e76c0122a143b076f51adf.woff') format('woff'),
+    url('//db.onlinewebfonts.com/t/48a3635ce1e76c0122a143b076f51adf.ttf') format('truetype'),
+    url('//db.onlinewebfonts.com/t/48a3635ce1e76c0122a143b076f51adf.svg#DINPro-Medium')
+      format('svg');
 }
 
-.flex1 { flex: 1; }
-.flex2 { flex: 2; }
-.flex3 { flex: 3; }
+body {
+  font-family: 'DINPro-Medium', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; 
+}
+
+.flex1 {
+  flex: 1;
+}
+.flex2 {
+  flex: 2;
+}
+.flex3 {
+  flex: 3;
+}
 
 .order-book {
   width: 240px;
@@ -35,7 +50,7 @@ body {
 }
 
 .quote:hover {
-  background-color: var(--quote-hover-background-color);
+  background-color: var(--quote-hover-background-color) !important;
 }
 
 .quote > div {
@@ -44,15 +59,15 @@ body {
   position: relative;
 }
 
-.quoto__bar{
+.quoto__bar {
   position: absolute;
   top: 0;
   right: 0;
   height: 100%;
 }
 
-.quote.buy {
-  animation: buyBackgroundAnimation .5s;
+.quote.buy, .quote_size.buy {
+  animation: buyBackgroundAnimation 0.5s;
 }
 
 .quote.buy .quote_price {
@@ -63,8 +78,8 @@ body {
   background-color: var(--quote-buy-ccumulative-total-size-bar-color);
 }
 
-.quote.sell {
-  animation: sellBackgroundAnimation .5s;
+.quote.sell, .quote_size.sell {
+  animation: sellBackgroundAnimation 0.5s;
 }
 
 .quote.sell .quote_price {
@@ -97,16 +112,28 @@ body {
   background-color: rgba(134, 152, 170, 0.12);
 }
 
-.last-price.up {
-  color: var(--quote-sell-text-color);
-  background-color: var(--quote-sell-ccumulative-total-size-bar-color);
+.last-price__icon {
+  margin-left: 4px;
 }
 
-.last-price.down {
+.last-price.normal .last-price__icon {
+  color: transparent;
+}
+
+.last-price.buy {
   color: var(--quote-buy-text-color);
   background-color: var(--quote-buy-ccumulative-total-size-bar-color);
 }
 
-.last-price__icon {
-  margin-left: 4px;
+.last-price.buy .last-price__icon {
+  transform: rotate(180deg);
+}
+
+.last-price.sell {
+  color: var(--quote-sell-text-color);
+  background-color: var(--quote-sell-ccumulative-total-size-bar-color);
+}
+
+.last-price span {
+  width: 70px;
 }

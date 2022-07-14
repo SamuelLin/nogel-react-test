@@ -1,33 +1,68 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import OrderBookQuote from './components/OrderBookQuote';
 import OrderBookLastPrice from './components/OrderBookLastPrice';
 
-function OrderBook() {
-  const [buyArray, setBuyArray] = useState([
-    ['19742.0', '231'],
-    ['19737.0', '541'],
-    ['19732.0', '20'],
-    ['19730.0', '1558'],
-    ['19728.5', '1781'],
-    ['19728.0', '2887'],
-    ['19727.5', '1303'],
-    ['19727.0', '2278'],
-    ['19726.5', '3230'],
-    ['19726.0', '1264']
-  ]);
-  const [sellArray, setSellArray] = useState([
-    ['19827.5', '3675'],
-    ['19825.5', '301'],
-    ['19824.0', '3129'],
-    ['19821.0', '2128'],
-    ['19820.0', '7933'],
-    ['19817.5', '1994'],
-    ['19817.0', '7505'],
-    ['19814.0', '9011'],
-    ['19811.0', '7697'],
-    ['19808.0', '5917']
-  ]);
+function OrderBookSellSection() {
+  const quotes = useSelector((state) => state.orderBook.asks);
+  let total = 0;
+  let accumulativeTotalSize = 0;
 
+  // 最大size排序
+  const quotesList = Object.keys(quotes).sort((a, b) => quotes[b] - quotes[a]);
+  quotesList.forEach((key) => {
+    total += +quotes[key];
+  });
+
+  return quotesList
+    .slice(0, 8) // 取最大size 8筆
+    .sort((a, b) => a - b) // 價錢排序
+    .map((key) => {
+      accumulativeTotalSize += +quotes[key];
+      return (
+        <OrderBookQuote
+          key={key}
+          price={key}
+          size={quotes[key]}
+          accumulativeTotalSize={accumulativeTotalSize}
+          total={total}
+        />
+      );
+    })
+    .reverse();
+}
+
+function OrderBookBuySection() {
+  const quotes = useSelector((state) => state.orderBook.bids);
+  let total = 0;
+  let accumulativeTotalSize = 0;
+
+  // 最大size排序
+  const quotesList = Object.keys(quotes).sort((a, b) => quotes[b] - quotes[a]);
+  quotesList.forEach((key) => {
+    total += +quotes[key];
+  });
+
+  return quotesList
+    .slice(0, 8) // 取最大size 8筆
+    .sort((a, b) => b - a) // 價錢排序
+    .map((key) => {
+      accumulativeTotalSize += +quotes[key];
+      return (
+        <OrderBookQuote
+          key={key}
+          price={key}
+          size={quotes[key]}
+          accumulativeTotalSize={accumulativeTotalSize}
+          total={total}
+          isBuy
+        />
+      );
+    });
+}
+
+function OrderBook() {
   return (
     <div className="order-book">
       <div className="order-book__header">
@@ -41,15 +76,9 @@ function OrderBook() {
           <div className="flex3">Total</div>
         </div>
 
-        {sellArray.map((quote) => {
-          return <OrderBookQuote key={quote[0]} price={quote[0]} size={quote[1]} />;
-        })}
-
+        <OrderBookSellSection />
         <OrderBookLastPrice />
-
-        {buyArray.map((quote) => {
-          return <OrderBookQuote key={quote[0]} price={quote[0]} size={quote[1]} isBuy />;
-        })}
+        <OrderBookBuySection />
       </div>
     </div>
   );

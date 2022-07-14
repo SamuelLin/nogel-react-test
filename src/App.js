@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
-
 import OrderBook from './OrderBook';
-import useLastParice from './hooks/useLastPrice';
+import useLastPriceSocket from './hooks/useLastPriceSocket';
+import useOrderBookSocket from './hooks/useOrderBookSocket';
 
 function App() {
-  useLastParice();
+  useLastPriceSocket();
+  useOrderBookSocket();
 
   return (
     <div>
