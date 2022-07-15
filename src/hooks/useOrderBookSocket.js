@@ -48,6 +48,7 @@ function useOrderBookSocket() {
 
       // 重新訂閱
       if (message.event === 'unsubscribe') {
+        console.log('socket unsubscribe');
         subscribe();
       }
     };
@@ -71,6 +72,7 @@ function useOrderBookSocket() {
   };
 
   const subscribe = () => {
+    console.log('scoket subscribe');
     socket.current.send(
       JSON.stringify({
         op: 'subscribe',
