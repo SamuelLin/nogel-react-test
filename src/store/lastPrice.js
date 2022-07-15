@@ -21,14 +21,11 @@ export const lastPriceSlice = createSlice({
       state.price = price;
       state.tradedId = tradedId;
       state.timestamp = timestamp;
-    },
-    resetLastPrice: (state) => {
-      state = { ...defaultState };
     }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { updateLastPrice, resetLastPrice } = lastPriceSlice.actions;
+export const { updateLastPrice } = lastPriceSlice.actions;
 
 export default lastPriceSlice.reducer;

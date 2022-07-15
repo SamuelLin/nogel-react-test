@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { numberWithCommas } from '../utils';
 import { ReactComponent as Arrow } from '../assets/IconArrowDown.svg';

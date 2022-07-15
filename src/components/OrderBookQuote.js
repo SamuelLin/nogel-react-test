@@ -1,4 +1,4 @@
-import { memo, useRef, useState } from 'react';
+import { memo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { numberWithCommas } from '../utils';
 
